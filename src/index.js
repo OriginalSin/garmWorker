@@ -20,7 +20,8 @@ window.addEventListener('load', async () => {
     });
 
     testLayer.setFilter([
-		{key: 'uid', lt: 19300}
+		{key: 'uid', lt: 400},
+		{key: 'uid', gt: 347}
 	]);
     testLayer.addTo(map);
 

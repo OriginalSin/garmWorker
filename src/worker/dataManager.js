@@ -144,33 +144,18 @@ const getItemsByPoint = p => {
 					return;
 				}
 				let x0 = x * tw;
-				// if (x0 + tw < 0) {
-					// x0 += Math.pow(2, z) * tw;
-				// }
 				if (p.x < x0 || p.x > x0 + tw) {
 					return;
 				}
 
 				const sc = tw / extent;
-				const xx = p.x * sc;
-				const yy = p.y * sc;
-				// console.log('offsetx:', x, y, z, extent, x0, y0, tw, sc);
-				// ctx.save();
-				// ctx.resetTransform();
-				// ctx.beginPath();
-				// let region = new Path2D();
-				// region.rect(x0, y0, tw, tw);
-				// ctx.clip(region);
-				// ctx.transform(sc, 0, 0, sc, x0, y0);
-
+				const xx = (p.x - x0) / sc;
+				const yy = (p.y - y0) / sc;
 				features.forEach(feature => {
 					if (feature.type === 3 && feature.path) {
 						if (ctx.isPointInPath(feature.path, xx, yy)) {
-						// if (ctx.isPointInPath(feature.path, xx, yy, 'evenodd')) {
 							items.push(feature.properties);
-				// console.log('feature:', feature, p, extent);
 						}
-						//Renderer.render2dpbf(ctx, feature.path);
 					}
 				});
 			});
@@ -241,6 +226,9 @@ const chkFilters = props => {
 			let opt = filters[key][i];
 			let val = props[opt.key];
 			if ('lt' in opt && val >= opt.lt) {
+				return false;
+			}
+			if ('gt' in opt && val <= opt.gt) {
 				return false;
 			}
 		}
