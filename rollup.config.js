@@ -1,4 +1,5 @@
-import babel from 'rollup-plugin-babel';
+import { babel } from '@rollup/plugin-babel';
+//import babel from 'rollup-plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import css from 'rollup-plugin-css-porter';
@@ -35,7 +36,10 @@ export default [
                 // {files: 'src/images/*.*', dest: 'public/assets/images'},
                 // {files: 'src/ImageBitmapLoader-worker.js', dest: 'public'},
             // ]),
+			// babel({ babelHelpers: 'bundled' })
+			
             babel({                
+                babelHelpers: 'bundled',
                 extensions: ['.js', '.mjs'],
                 exclude: ['node_modules/@babel/**', 'node_modules/core-js/**'],
                 include: ['example/**', 'src/**']
@@ -64,9 +68,10 @@ export default [
 				preferBuiltins: false
 			}),
             commonjs(),            
+			// babel({ babelHelpers: 'bundled' })
             babel({
-                // extensions,
-                // babelHelpers: 'bundled',
+                extensions,
+                babelHelpers: 'bundled',
                 exclude: ['node_modules/@pixi/polyfill/**'],
                 include: ['src/**/*'],
             }),

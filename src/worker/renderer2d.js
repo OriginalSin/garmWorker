@@ -2,7 +2,7 @@ export default {
 	render2dpbf: (ctx, path2d) => {		
 		//ctx.beginPath();
 		ctx.strokeStyle = 'blue';
-		ctx.fillStyle = 'rgba(255, 0, 0, 0.01)';
+		ctx.fillStyle = 'rgba(255, 0, 0, 1)';
 		ctx.fill(path2d);
 		ctx.stroke(path2d);
 		return true;
